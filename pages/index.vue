@@ -92,22 +92,35 @@ export default {
   name: "IndexPage",
   data() {
     return {
-      // movies: [],
-      // popularMovies: [],
+      movies: [],
+      popularMovies: [],
     };
   },
-  async asyncData({ params, $http }) {
-    const movies = await axios.get(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1`
-    );
-    const popularMovies = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1`
-    );
+  async fetch() {
+    this.movies = await fetch(
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1"
+    )
+      .then((res) => res.json())
+      .then((data) => data.results);
+    this.popularMovies = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1"
+    )
+      .then((res) => res.json())
+      .then((data) => data.results);
+  },
 
-    return {
-      movies: movies.data.results,
-      popularMovies: popularMovies.data.results,
-    };
-  },
+  // async asyncData({ params, $http }) {
+  //   const movies = await axios.get(
+  //     `https://api.themoviedb.org/3/movie/now_playing?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1`
+  //   );
+  //   const popularMovies = await axios.get(
+  //     `https://api.themoviedb.org/3/movie/popular?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1`
+  //   );
+
+  //   return {
+  //     movies: movies.data.results,
+  //     popularMovies: popularMovies.data.results,
+  //   };
+  // },
 };
 </script>

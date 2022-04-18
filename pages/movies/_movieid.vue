@@ -50,14 +50,25 @@ import axios from "axios";
 export default {
   name: "movie-detail",
   data() {
-    return {};
+    return {
+      movie: null,
+    };
   },
-
   async asyncData({ params }) {
-    const movie = await axios.get(
+    // const movie = await axios.get(
+    //   `https://api.themoviedb.org/3/movie/${params.movieid}?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1`
+    // );
+    // return { movie: movie.data };
+
+    const movie = await fetch(
       `https://api.themoviedb.org/3/movie/${params.movieid}?api_key=2e0ec924191ee1585a8ddadf6b7f1d7a&language=en-US&page=1`
-    );
-    return { movie: movie.data };
+    )
+      .then((res) => res.json())
+      .then((data) => data);
+
+    console.log(movie);
+
+    return { movie };
   },
 };
 </script>
