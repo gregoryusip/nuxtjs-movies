@@ -1,5 +1,7 @@
 # nuxt-movies-api
 
+Live Staging: https://nuxtjs-movies.vercel.app/
+
 ## Build Setup
 
 ```bash
